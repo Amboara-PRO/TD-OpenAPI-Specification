@@ -1,0 +1,9 @@
+{
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml",
+    "https://json.schemastore.org/github-action.json": ".github/action.yml",
+    "https://json.schemastore.org/kubernetes.json": "k8s/*.yaml",
+    "https://json.schemastore.org/compose-spec.json": "docker-compose*.yml",
+    "openapi:v3": "file:///c%3A/Users/USER/Desktop/TD-OpenAPI-Specification-main/exo2.yml"
+  }
+}
