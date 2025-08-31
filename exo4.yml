@@ -1,0 +1,62 @@
+openapi: 3.0.3
+info:
+  title: EXO 4
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /products:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/QParam"
+      responses:
+        200:
+          description: List of products found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+              examples:
+                multipleProducts:
+                  value:
+                    - name: "full-cream milk"
+                      expiration_datetime: "2025-09-15T12:00:00Z"
+                      price: 1.99
+                    - name: "bread"
+                      expiration_datetime: "2025-09-01T18:00:00Z"
+                      price: 2.50
+                emptyList:
+                  value: []
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+        expiration_datime:
+          type: string
+          format: date-time
+          example: "2025-12-31T23:59:59Z"
+        price:
+          type: number
+          format: float
+
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: Max number
+      required: false
+      schema:
+        type: string
+    QParam:
+      name: q
+      in: query
+      description: search
+      required: false
+      schema:
+        type: string
