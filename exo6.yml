@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: EXO 6
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /users/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+    put:
+      operationId: updatePersonalInfo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonalInfo'
+      responses:
+        200:
+          description: Personal Information updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+  
+  /users/{id}/address:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+    put:
+      operationId: updateAddress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      responses:
+        200:
+          description: Address updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+
+  /users/{id}/preferences:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+    put:
+      operationId: updatePreferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Preferences'
+      responses:
+        200:
+          description: Preferences updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+
+components:
+  parameters:
+    UserId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: User ID
+
+  schemas:
+    UserProfile:
+      type: object
+      required:
+        - id
+        - personalInfo
+        - address
+        - preferences
+      properties:
+        id:
+          type: integer
+        personalInfo:
+          $ref: '#/components/schemas/PersonalInfo'
+        address:
+          $ref: '#/components/schemas/Address'
+        preferences:
+          $ref: '#/components/schemas/Preferences'
+    
+    CreateUserProfile:
+      allOf:
+        - $ref: '#/components/schemas/PersonalInfo'
+        - $ref: '#/components/schemas/Address'
+        - $ref: '#/components/schemas/Preferences'
+    
+    PersonalInfo:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - birthdate
+        - email
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        email:
+          type: string
+          format: email
+
+    Address:
+      type: object
+      required:
+        - street
+        - city
+        - country
+        - postalCode
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        postalCode:
+          type: string
+    
+    Preferences:
+      type: object
+      required:
+        - needs_newsletter
+        - language
+      properties:
+        needs_newsletter:
+          type: boolean
+        language:
+          type: string
+          enum: [mg, fr, eng]
