@@ -51,7 +51,7 @@ paths:
                   $ref: "#/components/schemas/Order"
               examples:
                 sampleOrders:
-                  summary: Quelques commandes
+                  summary: Some commands
                   value:
                     - identifier: 101
                       customer_name: "Alice Dupont"
@@ -74,7 +74,7 @@ paths:
               $ref: "#/components/schemas/Order"
             examples:
               newOrder:
-                summary: Exemple de création de commande
+                summary: Example of creation command
                 value:
                   identifier: 103
                   customer_name: "Charlie Durand"
@@ -82,7 +82,7 @@ paths:
                   total_amount: 89.50
       responses:
         201:
-          description: Commande created
+          description: Command created
           content:
             application/json:
               schema:
@@ -114,7 +114,7 @@ components:
       properties:
         identifier:
           type: integer
-        custom_name:
+        customer_name:
           type: string
         creation_datetime:
           type: string
